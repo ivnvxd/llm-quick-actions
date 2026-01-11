@@ -18,9 +18,7 @@ const models = [
   { title: "3 Flash Preview ($0.50/$3)", value: "google:gemini-3-flash-preview" },
   { title: "2.5 Pro ($1.25/$10)", value: "google:gemini-2.5-pro" },
   { title: "2.5 Flash ($0.30/$2.50)", value: "google:gemini-2.5-flash" },
-  { title: "2.5 Flash Preview ($0.30/$2.50)", value: "google:gemini-2.5-flash-preview" },
-  { title: "2.5 Flash-Lite ($0.10/$0.40)", value: "google:gemini-2.5-flash-lite" },
-  { title: "2.5 Flash-Lite Preview ($0.10/$0.40)", value: "google:gemini-2.5-flash-lite-preview" }
+  { title: "2.5 Flash-Lite ($0.10/$0.40)", value: "google:gemini-2.5-flash-lite" }
 ];
 
 const commandModels = [
