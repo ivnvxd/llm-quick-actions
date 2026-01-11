@@ -33,7 +33,7 @@ export class GoogleProvider implements LLMProvider {
 
     const chat = genModel.startChat({
       history: history as Array<{ role: "user" | "model"; parts: Array<{ text: string }> }>,
-      systemInstruction: systemMessage?.content,
+      systemInstruction: systemMessage ? { role: "user", parts: [{ text: systemMessage.content }] } : undefined,
     });
 
     const result = await chat.sendMessageStream(lastMessage.content);
@@ -69,7 +69,7 @@ export class GoogleProvider implements LLMProvider {
 
     const chat = genModel.startChat({
       history: history as Array<{ role: "user" | "model"; parts: Array<{ text: string }> }>,
-      systemInstruction: systemMessage?.content,
+      systemInstruction: systemMessage ? { role: "user", parts: [{ text: systemMessage.content }] } : undefined,
     });
 
     const result = await chat.sendMessage(lastMessage.content);
