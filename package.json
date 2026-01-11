@@ -7,6 +7,21 @@
   "author": "ivnvxd",
   "categories": ["Productivity"],
   "license": "MIT",
+  "keywords": [
+    "ai",
+    "llm",
+    "gpt",
+    "claude",
+    "gemini",
+    "openai",
+    "anthropic",
+    "google",
+    "text",
+    "writing",
+    "translate",
+    "summarize",
+    "rewrite"
+  ],
   "commands": [
     {
       "name": "summarize",
