@@ -6,11 +6,7 @@ import { countToken, estimatePrice, formatPrice, getProviderDisplayName, sanitiz
 
 const MAX_INPUT_LENGTH = 100000;
 
-export default function ResultView(
-  prompt: string,
-  providerModelOverride: string | undefined,
-  toastTitle: string
-) {
+export default function ResultView(prompt: string, providerModelOverride: string | undefined, toastTitle: string) {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(true);
   const [inputTokenCount, setInputTokenCount] = useState(0);
@@ -155,10 +151,7 @@ export default function ResultView(
             text={formatPrice(estimatePrice(inputTokenCount, outputTokenCount, model))}
           />
           <Detail.Metadata.Separator />
-          <Detail.Metadata.Label
-            title="Duration"
-            text={duration > 0 ? `${duration.toFixed(1)}s` : "..."}
-          />
+          <Detail.Metadata.Label title="Duration" text={duration > 0 ? `${duration.toFixed(1)}s` : "..."} />
         </Detail.Metadata>
       }
     />
@@ -168,10 +161,7 @@ export default function ResultView(
 /**
  * Execute a completion without showing UI (for no-view commands)
  */
-export async function executeCompletion(
-  prompt: string,
-  providerModelOverride?: string
-): Promise<string> {
+export async function executeCompletion(prompt: string, providerModelOverride?: string): Promise<string> {
   const text = await getSelectedText();
 
   if (text.length > MAX_INPUT_LENGTH) {

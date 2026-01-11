@@ -26,17 +26,13 @@ export function createProvider(providerType: ProviderType): LLMProvider {
     }
     case "anthropic": {
       if (!prefs.anthropic_apikey) {
-        throw new Error(
-          "Anthropic API key is required. Please set it in the extension preferences."
-        );
+        throw new Error("Anthropic API key is required. Please set it in the extension preferences.");
       }
       return new AnthropicProvider(prefs.anthropic_apikey);
     }
     case "google": {
       if (!prefs.google_apikey) {
-        throw new Error(
-          "Google AI API key is required. Please set it in the extension preferences."
-        );
+        throw new Error("Google AI API key is required. Please set it in the extension preferences.");
       }
       return new GoogleProvider(prefs.google_apikey);
     }
@@ -56,9 +52,7 @@ export function getProviderAndModel(providerModelOverride?: string): {
 
   // Use override if provided and valid, otherwise use global default
   const effectiveSelection =
-    providerModelOverride &&
-    providerModelOverride !== "global" &&
-    !providerModelOverride.startsWith("_")
+    providerModelOverride && providerModelOverride !== "global" && !providerModelOverride.startsWith("_")
       ? providerModelOverride
       : prefs.default_model;
 

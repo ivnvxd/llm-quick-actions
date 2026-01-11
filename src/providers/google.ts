@@ -9,10 +9,7 @@ export class GoogleProvider implements LLMProvider {
     this.genAI = new GoogleGenerativeAI(apiKey);
   }
 
-  async *createStreamingCompletion(
-    messages: Message[],
-    model: string
-  ): AsyncGenerator<StreamChunk, void, unknown> {
+  async *createStreamingCompletion(messages: Message[], model: string): AsyncGenerator<StreamChunk, void, unknown> {
     const genModel = this.genAI.getGenerativeModel({ model });
 
     // Convert messages to Gemini format

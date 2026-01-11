@@ -9,8 +9,7 @@ interface Preferences {
 export default async function Execute() {
   const prefs = getPreferenceValues<Preferences>();
 
-  const prompt =
-    "You are a helpful assistant. Respond to the user's input. Only output the result, no explanations:";
+  const prompt = "You are a helpful assistant. Respond to the user's input. Only output the result, no explanations:";
 
   try {
     const result = await executeCompletion(prompt, prefs.provider_model_execute);

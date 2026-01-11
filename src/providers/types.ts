@@ -15,10 +15,7 @@ export interface LLMProvider {
    * Create a streaming completion
    * @returns AsyncGenerator that yields content chunks
    */
-  createStreamingCompletion(
-    messages: Message[],
-    model: string
-  ): AsyncGenerator<StreamChunk, void, unknown>;
+  createStreamingCompletion(messages: Message[], model: string): AsyncGenerator<StreamChunk, void, unknown>;
 
   /**
    * Create a non-streaming completion

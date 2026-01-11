@@ -9,10 +9,7 @@ export class OpenAIProvider implements LLMProvider {
     this.client = new OpenAI({ apiKey });
   }
 
-  async *createStreamingCompletion(
-    messages: Message[],
-    model: string
-  ): AsyncGenerator<StreamChunk, void, unknown> {
+  async *createStreamingCompletion(messages: Message[], model: string): AsyncGenerator<StreamChunk, void, unknown> {
     const stream = await this.client.chat.completions.create({
       model,
       messages: messages.map((m) => ({

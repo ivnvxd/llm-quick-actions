@@ -9,10 +9,7 @@ export class AnthropicProvider implements LLMProvider {
     this.client = new Anthropic({ apiKey });
   }
 
-  async *createStreamingCompletion(
-    messages: Message[],
-    model: string
-  ): AsyncGenerator<StreamChunk, void, unknown> {
+  async *createStreamingCompletion(messages: Message[], model: string): AsyncGenerator<StreamChunk, void, unknown> {
     // Anthropic uses system message separately
     const systemMessage = messages.find((m) => m.role === "system");
     const userMessages = messages.filter((m) => m.role !== "system");
@@ -52,8 +49,6 @@ export class AnthropicProvider implements LLMProvider {
     });
 
     const textBlock = response.content.find((block: { type: string }) => block.type === "text");
-    return textBlock?.type === "text"
-      ? (textBlock as { type: "text"; text: string }).text.trim()
-      : "";
+    return textBlock?.type === "text" ? (textBlock as { type: "text"; text: string }).text.trim() : "";
   }
 }
