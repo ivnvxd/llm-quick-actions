@@ -4,6 +4,8 @@ import { getProviderAndModel } from "./providers";
 import { ProviderType } from "./providers/types";
 import { countToken, estimatePrice, formatPrice, getProviderDisplayName, sanitizeErrorMessage } from "./util";
 
+const MAX_INPUT_LENGTH = 100000;
+
 export default function ResultView(
   prompt: string,
   providerModelOverride: string | undefined,
@@ -30,6 +32,12 @@ export default function ResultView(
 
     try {
       const text = await getSelectedText();
+
+      if (text.length > MAX_INPUT_LENGTH) {
+        throw new Error(
+          `Selected text is too long (${text.length.toLocaleString()} characters). Maximum is ${MAX_INPUT_LENGTH.toLocaleString()} characters.`
+        );
+      }
 
       const {
         provider,
@@ -165,6 +173,12 @@ export async function executeCompletion(
   providerModelOverride?: string
 ): Promise<string> {
   const text = await getSelectedText();
+
+  if (text.length > MAX_INPUT_LENGTH) {
+    throw new Error(
+      `Selected text is too long (${text.length.toLocaleString()} characters). Maximum is ${MAX_INPUT_LENGTH.toLocaleString()} characters.`
+    );
+  }
 
   const { provider, model } = getProviderAndModel(providerModelOverride);
 
