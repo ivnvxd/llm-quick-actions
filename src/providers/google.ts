@@ -19,6 +19,10 @@ export class GoogleProvider implements LLMProvider {
     const systemMessage = messages.find((m) => m.role === "system");
     const userMessages = messages.filter((m) => m.role !== "system");
 
+    if (userMessages.length === 0) {
+      throw new Error("At least one user message is required");
+    }
+
     // Build the prompt combining system and user messages
     const history = userMessages.slice(0, -1).map((m) => ({
       role: m.role === "assistant" ? "model" : "user",
@@ -50,6 +54,10 @@ export class GoogleProvider implements LLMProvider {
     // Convert messages to Gemini format
     const systemMessage = messages.find((m) => m.role === "system");
     const userMessages = messages.filter((m) => m.role !== "system");
+
+    if (userMessages.length === 0) {
+      throw new Error("At least one user message is required");
+    }
 
     // Build the prompt combining system and user messages
     const history = userMessages.slice(0, -1).map((m) => ({
