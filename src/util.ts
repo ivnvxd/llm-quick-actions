@@ -2,6 +2,17 @@ import { encode } from "@nem035/gpt-3-encoder";
 import { ProviderType } from "./providers/types";
 
 /**
+ * Sanitize error messages to remove potential API keys
+ */
+export function sanitizeErrorMessage(message: string): string {
+  return message
+    .replace(/sk-[a-zA-Z0-9-_]{20,}/g, "sk-***HIDDEN***")
+    .replace(/sk-proj-[a-zA-Z0-9-_]{20,}/g, "sk-proj-***HIDDEN***")
+    .replace(/sk-ant-[a-zA-Z0-9-_]{20,}/g, "sk-ant-***HIDDEN***")
+    .replace(/AIza[a-zA-Z0-9-_]{35}/g, "AIza***HIDDEN***");
+}
+
+/**
  * Count tokens in content (approximation, primarily accurate for OpenAI)
  */
 export function countToken(content: string): number {

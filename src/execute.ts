@@ -1,5 +1,6 @@
 import { getPreferenceValues, Clipboard, showHUD } from "@raycast/api";
 import { executeCompletion } from "./common";
+import { sanitizeErrorMessage } from "./util";
 
 interface Preferences {
   provider_model_execute?: string;
@@ -18,6 +19,6 @@ export default async function Execute() {
     await showHUD("Result pasted");
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
-    await showHUD(`Error: ${message}`);
+    await showHUD(`Error: ${sanitizeErrorMessage(message)}`);
   }
 }

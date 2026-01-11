@@ -2,7 +2,7 @@ import { Detail, ActionPanel, Action, getSelectedText, showToast, Toast, Icon } 
 import { useState, useEffect, useRef } from "react";
 import { getProviderAndModel } from "./providers";
 import { ProviderType } from "./providers/types";
-import { countToken, estimatePrice, formatPrice, getProviderDisplayName } from "./util";
+import { countToken, estimatePrice, formatPrice, getProviderDisplayName, sanitizeErrorMessage } from "./util";
 
 export default function ResultView(
   prompt: string,
@@ -80,7 +80,7 @@ export default function ResultView(
       toast.title = "Error";
       setLoading(false);
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
-      setResponse(`## Error\n\n${errorMessage}`);
+      setResponse(`## Error\n\n${sanitizeErrorMessage(errorMessage)}`);
     }
   }
 

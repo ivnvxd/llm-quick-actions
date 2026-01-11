@@ -1,5 +1,6 @@
 import { getPreferenceValues, Clipboard, showHUD, LaunchProps } from "@raycast/api";
 import { executeCompletion } from "./common";
+import { sanitizeErrorMessage } from "./util";
 
 interface Preferences {
   provider_model_transform?: string;
@@ -22,6 +23,6 @@ export default async function Transform(props: LaunchProps<{ arguments: Argument
     await showHUD("Result pasted");
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
-    await showHUD(`Error: ${message}`);
+    await showHUD(`Error: ${sanitizeErrorMessage(message)}`);
   }
 }
