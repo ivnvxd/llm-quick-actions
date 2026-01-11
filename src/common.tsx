@@ -93,6 +93,10 @@ export default function ResultView(
 
   useEffect(() => {
     runCompletion();
+
+    return () => {
+      requestIdRef.current++;
+    };
   }, []);
 
   return (
