@@ -11,10 +11,16 @@ interface Arguments {
 }
 
 export default async function Transform(props: LaunchProps<{ arguments: Arguments }>) {
-  const selectedText = await getSelectedText();
+  let selectedText: string;
+  try {
+    selectedText = await getSelectedText();
+  } catch {
+    await showHUD("No text selected. Please select some text and try again.");
+    return;
+  }
+
   const { prompt } = props.arguments;
   const prefs = getPreferenceValues<Preferences>();
-
   const systemPrompt = `${prompt}\n\nOnly output the result, no explanations:`;
 
   try {

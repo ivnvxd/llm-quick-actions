@@ -7,9 +7,15 @@ interface Preferences {
 }
 
 export default async function Execute() {
-  const selectedText = await getSelectedText();
-  const prefs = getPreferenceValues<Preferences>();
+  let selectedText: string;
+  try {
+    selectedText = await getSelectedText();
+  } catch {
+    await showHUD("No text selected. Please select some text and try again.");
+    return;
+  }
 
+  const prefs = getPreferenceValues<Preferences>();
   const prompt = "You are a helpful assistant. Respond to the user's input. Only output the result, no explanations:";
 
   try {
