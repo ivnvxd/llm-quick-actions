@@ -1,4 +1,4 @@
-import { getPreferenceValues, Clipboard, showHUD, LaunchProps } from "@raycast/api";
+import { getPreferenceValues, getSelectedText, Clipboard, showHUD, LaunchProps } from "@raycast/api";
 import { executeCompletion } from "./common";
 import { sanitizeErrorMessage } from "./util";
 
@@ -11,13 +11,14 @@ interface Arguments {
 }
 
 export default async function Transform(props: LaunchProps<{ arguments: Arguments }>) {
+  const selectedText = await getSelectedText();
   const { prompt } = props.arguments;
   const prefs = getPreferenceValues<Preferences>();
 
   const systemPrompt = `${prompt}\n\nOnly output the result, no explanations:`;
 
   try {
-    const result = await executeCompletion(systemPrompt, prefs.provider_model_transform);
+    const result = await executeCompletion(selectedText, systemPrompt, prefs.provider_model_transform);
 
     await Clipboard.paste(result);
     await showHUD("Result pasted");

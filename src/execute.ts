@@ -1,4 +1,4 @@
-import { getPreferenceValues, Clipboard, showHUD } from "@raycast/api";
+import { getPreferenceValues, getSelectedText, Clipboard, showHUD } from "@raycast/api";
 import { executeCompletion } from "./common";
 import { sanitizeErrorMessage } from "./util";
 
@@ -7,12 +7,13 @@ interface Preferences {
 }
 
 export default async function Execute() {
+  const selectedText = await getSelectedText();
   const prefs = getPreferenceValues<Preferences>();
 
   const prompt = "You are a helpful assistant. Respond to the user's input. Only output the result, no explanations:";
 
   try {
-    const result = await executeCompletion(prompt, prefs.provider_model_execute);
+    const result = await executeCompletion(selectedText, prompt, prefs.provider_model_execute);
 
     await Clipboard.paste(result);
     await showHUD("Result pasted");
